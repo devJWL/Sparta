@@ -6,16 +6,14 @@ public class Product {
     // 상품 상세 설명
     private String detail;
     // 상품의 타입
-    private String type;  // burger, frozen, drink, beer
     // 상품의 가격
     double price;
     // 상품의 사이즈
     private String size;   // single, double
 
-    public Product(String name, String detail, String type, double price, String size) {
+    public Product(String name, String detail, double price, String size) {
         this.name = name;
         this.detail = detail;
-        this.type = type;
         this.price = price;
         this.size = size;
     }
@@ -36,14 +34,6 @@ public class Product {
         this.detail = detail;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -58,5 +48,16 @@ public class Product {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public String toString () {
+        StringBuilder output = new StringBuilder();
+        output.append(name); output.append('\n');
+        output.append(detail); output.append('\n');
+        output.append(price); output.append('\n');
+        if (size != null) {
+            output.append(size); output.append('\n');
+        }
+        return output.toString();
     }
 }

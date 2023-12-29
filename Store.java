@@ -11,6 +11,35 @@ public class Store {
         scanner = new Scanner(System.in);
     }
 
+    public void run() {
+        while(true) {
+            welcome();
+            int sel = select();
+            if (sel == 7) break;
+            if (sel == 1){
+                System.out.println(sel);
+            }
+            else if (sel == 2){
+                System.out.println(sel);
+            }
+            else if (sel == 3) {
+                System.out.println(sel);
+            }
+            else if (sel == 4) {
+                System.out.println(sel);
+            }
+            else if (sel == 5) {
+                System.out.println(sel);
+            }
+            else if (sel == 6) {
+                System.out.println(sel);
+            }
+            else{
+                System.out.println(sel);
+            }
+        }
+    }
+
     public void welcome() {
         System.out.println("\"SHAKESHACK BURGER에 오신걸 환영합니다.\"");
         System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.\n");
@@ -25,6 +54,14 @@ public class Store {
         System.out.println("[ ORDER MENU ]");
         System.out.println("5. Order                |   장바구니를 확인 후 주문합니다.");
         System.out.println("6. Cancel               |   진행중인 주문을 취소합니다.");
+        System.out.println("7. Turn off             |   키오스크 종료.");
     }
 
+    int select() {
+        String input = scanner.next();
+        if (input.length() > 1) return -1;
+        int sel = Integer.parseInt(input);
+        if (sel < 1 || sel > 7) return -1;
+        return sel;
+    }
 }
