@@ -6,8 +6,12 @@ public class Store {
     private MenuBoard menuBoard;
     Scanner scanner;
 
+    public Store() {
+        menuBoard = new MenuBoard();
+        scanner = new Scanner(System.in);
+    }
 
-    public void showMenu() {
+    public void welcome() {
         System.out.println("\"SHAKESHACK BURGER에 오신걸 환영합니다.\"");
         System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.\n");
 
@@ -23,13 +27,4 @@ public class Store {
         System.out.println("6. Cancel               |   진행중인 주문을 취소합니다.");
     }
 
-
-    public Store() {
-        menuBoard = new MenuBoard();
-        scanner = new Scanner(System.in);
-    }
-    public static void main(String[] args) {
-        Store store = new Store();
-        store.showMenu();
-    }
 }
