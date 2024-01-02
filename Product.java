@@ -1,13 +1,13 @@
 public class Product extends Menu{
-    private double sPrice;
-    private double dPrice;
-    private boolean hasOption; // ture 사이즈 선택 가능
+    private double sPrice; // normal size or single size
+    private double dPrice; // double size
+    private String type;  // burger, frozen custard, drink, beer
 
-    public Product(String name, String detail, double sPrice, double dPrice, boolean hasOption) {
+    public Product(String name, String detail, double sPrice, double dPrice, String type) {
         super(name, detail);
         this.sPrice = sPrice;
         this.dPrice = dPrice;
-        this.hasOption = hasOption;
+        this.type = type;
     }
 
     public double getsPrice() {
@@ -26,12 +26,12 @@ public class Product extends Menu{
         this.dPrice = dPrice;
     }
 
-    public boolean isHasOption() {
-        return hasOption;
+    public String getType() {
+        return type;
     }
 
-    public void setHasOption(boolean hasOption) {
-        this.hasOption = hasOption;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String toString() {
