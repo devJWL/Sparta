@@ -22,4 +22,11 @@ public class Menu {
     public void setDetail(String detail) {
         this.detail = detail;
     }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(name); sb.append('\n');
+        sb.append(detail); sb.append('\n');
+        return sb.toString();
+    }
 }

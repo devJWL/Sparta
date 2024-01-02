@@ -1,18 +1,29 @@
 public class Product extends Menu{
-    private double price;
+    private double sPrice;
+    private double dPrice;
     private boolean hasOption; // ture 사이즈 선택 가능
 
-    public Product(String name, String detail, double price, boolean hasOption) {
+    public Product(String name, String detail, double sPrice, double dPrice, boolean hasOption) {
         super(name, detail);
-        this.price = price;
+        this.sPrice = sPrice;
+        this.dPrice = dPrice;
         this.hasOption = hasOption;
     }
-    public double getPrice() {
-        return price;
+
+    public double getsPrice() {
+        return sPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setsPrice(double sPrice) {
+        this.sPrice = sPrice;
+    }
+
+    public double getdPrice() {
+        return dPrice;
+    }
+
+    public void setdPrice(double dPrice) {
+        this.dPrice = dPrice;
     }
 
     public boolean isHasOption() {
@@ -21,5 +32,13 @@ public class Product extends Menu{
 
     public void setHasOption(boolean hasOption) {
         this.hasOption = hasOption;
+    }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(super.toString());
+        sb.append("Single : ").append(sPrice);
+        sb.append("Double : ").append(dPrice);
+        return sb.toString();
     }
 }
