@@ -46,15 +46,19 @@ public class Kiosk {
             case "Burger" :
                 product = new Burger(name, detail, sPrice, dPrice, type);
                 burgerList.add(product);
+                break;
             case "FrozenCustard" :
                 product = new FrozenCustard(name, detail, sPrice, dPrice, type);
                 frozenCustardList.add(product);
+                break;
             case "Drink" :
                 product = new Drink(name, detail, sPrice, dPrice, type);
                 drinkList.add(product);
+                break;
             case "Beer" :
                 product = new Beer(name, detail, sPrice, dPrice, type);
                 beerList.add(product);
+                break;
         }
         productList.add(product);
         return product;
