@@ -37,8 +37,14 @@ public class Product extends Menu{
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append(super.toString());
-        sb.append("Single : ").append(sPrice);
-        sb.append("Double : ").append(dPrice);
+        // 가격이 한 가지인 항목
+        if (dPrice == 0) {
+            sb.append(sPrice).append('\n');
+        }
+        else {
+            sb.append("Single : ").append(sPrice).append('\n');
+            sb.append("Double : ").append(dPrice).append('\n');
+        }
         return sb.toString();
     }
 }
