@@ -1,6 +1,7 @@
 
 public class Main {
     public static void main(String[] args) {
-        Kiosk.run();
+        Kiosk kiosk = new Kiosk();
+        kiosk.run();
     }
 }
