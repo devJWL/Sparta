@@ -22,7 +22,7 @@ public class Order {
 
 
     // 물품의 갯수를 한개씩 빼는 메소드
-    public void subtractOrder(Product product) {
+    public void substractOrder(Product product) {
         int cnt = menuList.getOrDefault(product, -1);
         --cnt;
         // 장바구니에 없는 물건이 input으로 들어온 경우
