@@ -31,6 +31,7 @@ public class Kiosk {
     }
 
     public void run() throws InterruptedException {
+
         while(true) {
             showMenu();
             int sel = sc.nextInt();
