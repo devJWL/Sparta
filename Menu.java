@@ -1,8 +1,21 @@
+
 public class Menu {
+    // 데이터베이스 접근을 위한 번호
+    private int no;
+    // 메뉴 이름
     private String name;
+    // 메뉴 상세설명
     private String detail;
 
-    public Menu(String name, String detail) {
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public Menu(int no, String name, String detail) {
         this.name = name;
         this.detail = detail;
     }
@@ -25,8 +38,8 @@ public class Menu {
 
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("메뉴명 : ").append(name).append('\n');
-        sb.append("상세설명 : ").append(detail).append('\n');
+        sb.append("메뉴명 -> ").append(name);
+        sb.append("    상세설명 -> ").append(detail);
         return sb.toString();
     }
 }

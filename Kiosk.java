@@ -1,34 +1,87 @@
-import util.Type;
-import java.util.ArrayList;
-import java.util.List;
+import util.MenuType;
+import util.ProductType;
+
+import java.sql.Array;
+import java.util.*;
+
+import static util.MenuType.*;
+
 
 public class Kiosk {
+    private final Database database;
+    private final Map<Integer, ArrayList<Product>> listMap;
+    private final List<Product> productList;
+    private final Order order;
+    private final Cart cart;
+    private Scanner sc;
+    private String prevWork = "";
 
-    Order order;
-    List<Product> burgerList;
-    List<Product> frozenCustardList;
-    List<Product> drinkList;
-    List<Product> beerList;
-    List<Product> productList;
 
     public Kiosk() {
-        order = new Order();
-        burgerList = new ArrayList<>();
-        frozenCustardList = new ArrayList<>();
-        drinkList = new ArrayList<>();
-        beerList = new ArrayList<>();
+        database = new Database();
+        listMap = new HashMap<>();
+        for (int i = ProductType.START.ordinal() + 1; i < ProductType.END.ordinal(); ++i) {
+            listMap.put(i, new ArrayList<>());
+        }
         productList = new ArrayList<>();
+        cart = new Cart();
+        order = new Order(cart);
+        sc = new Scanner(System.in);
         init();
-
-
     }
 
-    public void run() {
-
+    public void run() throws InterruptedException {
+        while(true) {
+            showMenu();
+            int sel = sc.nextInt();
+            // 메뉴 선택
+            if (sel >= BURGERS.ordinal() && sel <= BEER.ordinal()) {
+                System.out.println("SHAKESHACK BURGER에 오신걸 환영합니다.");
+                System.out.println("아래 상품메뉴판을 보시고 메뉴를 골라 입력해주세요.");
+                List<Product> products = listMap.get(sel);
+                String type = "";
+                if (sel == BURGERS.ordinal()) {
+                   type = "Burgers MENU";
+                }
+                else if (sel == FROZEN_CUSTARD.ordinal()) {
+                    type = "ForzenCustard MENU";
+                }
+                else if (sel == DRINKS.ordinal()) {
+                    type = "Drinks MENU";
+                }
+                else {
+                    type = "Beer MENU";
+                }
+                System.out.println(" [ " + type + " ]");
+                prevWork = order.buy(products);
+            }
+            else if(sel == ORDER.ordinal()) {
+                order.order();
+            }
+            else if (sel == CANCEL.ordinal()) {
+                order.cancel();
+            }
+         }
     }
+    private void init (){
+        List<Product> products = new ArrayList<>(database.getDatabase().values());
+        for (Product product : products) {
+            switch (product.getType()) {
+                case BURGER -> listMap.get(ProductType.BURGER.ordinal()).add(product);
+                case FROZEN_CUSTARD -> listMap.get(ProductType.FROZEN_CUSTARD.ordinal()).add(product);
+                case DRINK -> listMap.get(ProductType.DRINK.ordinal()).add(product);
+                case BEER -> listMap.get(ProductType.BEER.ordinal()).add(product);
+            }
+            productList.add(product);
+        }
+    }
+    private void showMenu() {
 
-
-    public void showMenu() {
+        if (!prevWork.equals("")) {
+            System.out.println(prevWork);
+            System.out.println();
+            prevWork = "";
+        }
         System.out.println("SHAKESHACK BURGER에 오신걸 환영합니다.");
         System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
 
@@ -41,21 +94,5 @@ public class Kiosk {
         System.out.println("[ ORDER MENU ]");
         System.out.println("5. Order            |   장바구니를 확인 후 주문합니다.");
         System.out.println("6. Cancel           |   진행중인 주문을 취소합니다.");
-    }
-
-    private Product makeProduct(String name, String detail, double sPrice, double dPrice, Type type) {
-        Product product = new Product(name, detail, sPrice, dPrice, type);
-        switch (type) {
-            case BURGER -> burgerList.add(product);
-            case FROZEN_CUSTARD -> frozenCustardList.add(product);
-            case DRINK -> drinkList.add(product);
-            case BEER -> beerList.add(product);
-        }
-        productList.add(product);
-        return product;
-    }
-
-    public void init() {
-
     }
 }
