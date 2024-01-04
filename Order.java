@@ -3,6 +3,7 @@ import util.SizeType;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Order {
     private Cart cart;
@@ -36,45 +37,48 @@ public class Order {
 //                break;
 //            }
 //        }
-        Product product = products.get(select);
+        Product product = new Product(products.get(select));
         StringBuffer sb = new StringBuffer();
+
         if (product.getdPrice() != 0) {
             System.out.println("위 메뉴의 어떤 옵션으로 추가하시겠습니까?");
             if (product.getType() == ProductType.DRINK) {
-                System.out.print("1. Regular (" + product.getsPrice() + ")   ");
-                System.out.println("2. Large (" + product.getdPrice() + ")");
+                System.out.print("1. Regular (₩" + product.getsPrice() + ")   ");
+                System.out.println("2. Large (₩" + product.getdPrice() + ")");
                 select = sc.nextInt();
                 if (select == 1) {
-                    sb.append(product.getName()).append(" (Regular)  ")
+                    sb.append(product.getName()).append(" (Regular)  ₩")
                             .append(String.valueOf(product.getsPrice()))
                             .append("  ")
                             .append(product.getDetail());
+                    product.setName(product.getName() + "(R)");
                 }
                 else {
-                    sb.append(product.getName()).append(" (Large)  ")
+                    sb.append(product.getName()).append(" (Large)  ₩")
                             .append(String.valueOf(product.getdPrice()))
                             .append("  ")
                             .append(product.getDetail());
-                    product.setSize(SizeType.LARGE);
+                    product.setName(product.getName() + "(L)");
                 }
             }
             else {
-                System.out.print("1. Single (" + product.getsPrice() + ")   ");
-                System.out.println("2. Double (" + product.getdPrice() + ")");
+                System.out.print("1. Single (₩" + product.getsPrice() + ")   ");
+                System.out.println("2. Double (₩" + product.getdPrice() + ")");
                 select = sc.nextInt();
                 if (select == 1) {
-                    sb.append(product.getName()).append(" (Single)  ")
+                    sb.append(product.getName()).append(" (Single)  ₩")
                             .append(String.valueOf(product.getsPrice()))
                             .append("  ")
                             .append(product.getDetail());
+                    product.setName(product.getName() + "(S)");
                 }
                 else {
-                    sb.append(product.getName()).append(" (Double)  ")
+                    sb.append(product.getName()).append(" (Double)  ₩")
                             .append(String.valueOf(product.getdPrice()))
                             .append("  ")
                             .append(product.getDetail());
-
                     product.setSize(SizeType.DOUBLE);
+                    product.setName(product.getName() + "(D)");
                 }
             }
         }
@@ -86,21 +90,22 @@ public class Order {
         System.out.println("1. 확인       2. 취소");
         select = sc.nextInt();
         if (select == 1) {
-            cart.addOrder(product);
+            cart.addCart(product);
             return product.getName() + " 가 장바구니에 추가되었습니다.";
         }
         return "";
     }
 
     public void order() throws InterruptedException {
-        List<Product> products = cart.getMenuList();
+        Set<Product> products = cart.getSet();
         if (products.size() == 0) return;
         System.out.println("아래와 같이 주문 하시겠습니까?");
         System.out.println("[ Orders ]");
 
         double total = 0;
+
         for (Product product : products) {
-            int cnt = cart.getMenuHash().get(product.getNo());
+            int cnt = cart.getMenuHash().get(product);
             double price;
             if (product.getSize().getValue() == SizeType.NORMAL.getValue()) {
                 price = product.getsPrice();
@@ -108,15 +113,17 @@ public class Order {
             else {
                 price = product.getdPrice();
             }
+
             StringBuffer sb = new StringBuffer();
-            sb.append(product.getName()).append(" | ").append(price).append(" | ").append(cnt).append("개")
+            sb.append(product.getName()).append(" | ₩").append(price).append(" | ").append(cnt).append("개")
                     .append(" | ").append(product.getDetail());
             System.out.println(sb.toString());
-            total += price;
+            total += price * cart.getMenuHash().get(product);
         }
+
         System.out.println("[ Total ]");
-        System.out.println(total);
-        System.out.println("1. 주문    2. 메뉴판");
+        System.out.printf("₩%.1f\n", total);
+        System.out.println("1. 주문하기    2. 메뉴판으로 돌아가기");
         int sel = sc.nextInt();
 
         if (sel == 1) {

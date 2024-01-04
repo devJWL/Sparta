@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 public class Menu {
     // 데이터베이스 접근을 위한 번호
@@ -41,5 +42,18 @@ public class Menu {
         sb.append("메뉴명 -> ").append(name);
         sb.append("    상세설명 -> ").append(detail);
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Menu menu = (Menu) o;
+        return no == menu.no && Objects.equals(name, menu.name) && Objects.equals(detail, menu.detail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(no, name, detail);
     }
 }

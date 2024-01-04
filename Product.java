@@ -1,12 +1,15 @@
 import util.ProductType;
 import util.SizeType;
 
+import java.util.Objects;
+
 
 public class Product extends Menu{
     private double sPrice; // Normal or Single or Regular
     private double dPrice; // Double or Large
     private final ProductType type;  //     BURGER, FROZEN_CUSTARD, DRINK, BEER
     private SizeType size = SizeType.NORMAL;  // NORMAL == SINGLE == REGULER,  DOUBLE == LARGE
+
 
     public Product(int no, String name, String detail, double sPrice, double dPrice, ProductType type) {
         super(no, name, detail);
@@ -15,6 +18,13 @@ public class Product extends Menu{
         this.type = type;
     }
 
+    public Product(Product product) {
+        super(product.getNo(), product.getName(), product.getDetail());
+        this.sPrice = product.sPrice;
+        this.dPrice = product.dPrice;
+        this.type = product.type;
+        this.size = product.getSize();
+    }
     public double getsPrice() {
         return sPrice;
     }
@@ -53,13 +63,29 @@ public class Product extends Menu{
             return sb.toString();
         }
         if (type == ProductType.DRINK){
-            sb.append("Regular : ").append(sPrice).append("    ");
-            sb.append("Large : ").append(dPrice);
+            sb.append("Regular : ₩").append(sPrice).append("    ");
+            sb.append("Large : ₩").append(dPrice);
         }
         else {
-            sb.append("Single : ").append(sPrice).append("    ");
-            sb.append("Double : ").append(dPrice);
+            sb.append("Single : ₩").append(sPrice).append("    ");
+            sb.append("Double : ₩").append(dPrice);
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Product product = (Product) o;
+        return Double.compare(product.sPrice, sPrice) == 0
+                && Double.compare(product.dPrice, dPrice) == 0
+                && type == product.type && size == product.size;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), sPrice, dPrice, type, size);
     }
 }
