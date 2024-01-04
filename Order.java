@@ -24,9 +24,9 @@ public class Order {
     // 물품의 갯수를 한개씩 빼는 메소드
     public void substractOrder(Product product) {
         int cnt = menuList.getOrDefault(product, -1);
-        --cnt;
         // 장바구니에 없는 물건이 input으로 들어온 경우
-        if (cnt == -2) return;
+        if (cnt == -1) return;
+        --cnt;
         // 마지막 한 개를 비운 경우
         if (cnt == 0) {
             menuList.remove(product);
