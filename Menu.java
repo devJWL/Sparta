@@ -25,8 +25,8 @@ public class Menu {
 
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append(name).append('\n');
-        sb.append(detail).append('\n');
+        sb.append("메뉴명 : ").append(name).append('\n');
+        sb.append("상세설명 : ").append(detail).append('\n');
         return sb.toString();
     }
 }

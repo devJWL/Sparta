@@ -1,7 +1,5 @@
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 
 public class Order {
@@ -31,7 +29,7 @@ public class Order {
         if (cnt == 0) {
             menuList.remove(product);
         }
-        // 한개 이상 남은 경우
+        // 한 개 이상 남은 경우
         else {
             menuList.put(product, cnt);
         }
