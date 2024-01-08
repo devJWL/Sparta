@@ -17,6 +17,7 @@ public class Menu {
     }
 
     public Menu(int no, String name, String detail) {
+        this.no = no;
         this.name = name;
         this.detail = detail;
     }
@@ -39,8 +40,10 @@ public class Menu {
 
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("메뉴명 -> ").append(name);
-        sb.append("    상세설명 -> ").append(detail);
+        sb.append(name)
+                .append(" | ")
+                .append(detail)
+                .append(" | ");
         return sb.toString();
     }
 
