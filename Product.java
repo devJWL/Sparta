@@ -57,17 +57,17 @@ public class Product extends Menu{
         StringBuffer sb = new StringBuffer();
         sb.append(super.toString());
         // 가격이 한 가지인 항목
-        sb.append("    가격 -> ");
         if (dPrice == 0) {
-            sb.append(sPrice);
+            sb.append("₩").append(sPrice)
+                    .append(" | ");
             return sb.toString();
         }
         if (type == ProductType.DRINK){
-            sb.append("Regular : ₩").append(sPrice).append("    ");
+            sb.append("Regular : ₩").append(sPrice).append(" | ");
             sb.append("Large : ₩").append(dPrice);
         }
         else {
-            sb.append("Single : ₩").append(sPrice).append("    ");
+            sb.append("Single : ₩").append(sPrice).append(" | ");
             sb.append("Double : ₩").append(dPrice);
         }
         return sb.toString();
