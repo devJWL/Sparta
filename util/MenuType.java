@@ -1,7 +1,7 @@
 package util;
 
 public enum MenuType {
-    START,
+    HIDDEN,
     BURGERS,
     FROZEN_CUSTARD,
     DRINKS,
