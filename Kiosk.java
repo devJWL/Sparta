@@ -14,8 +14,7 @@ public class Kiosk {
     private final Order order;
     private final Cart cart;
     private Scanner sc;
-    private String prevWork = "";
-
+    private String message = "";
 
     public Kiosk() {
         database = new Database();
@@ -54,13 +53,19 @@ public class Kiosk {
                     type = "Beer MENU";
                 }
                 System.out.println(" [ " + type + " ]");
-                prevWork = order.buy(products);
+                message = order.addCart(products);
             }
             else if(sel == ORDER.ordinal()) {
-                order.order();
+                order.buy();
             }
             else if (sel == CANCEL.ordinal()) {
-                order.cancel();
+                message = order.cancel();
+            }
+            else if (sel == HIDDEN.ordinal()) {
+                order.totalList();
+            }
+            else {
+                continue;
             }
          }
     }
@@ -72,16 +77,17 @@ public class Kiosk {
                 case FROZEN_CUSTARD -> listMap.get(ProductType.FROZEN_CUSTARD.ordinal()).add(product);
                 case DRINK -> listMap.get(ProductType.DRINK.ordinal()).add(product);
                 case BEER -> listMap.get(ProductType.BEER.ordinal()).add(product);
+                // default
             }
             productList.add(product);
         }
     }
     private void showMenu() {
 
-        if (!prevWork.equals("")) {
-            System.out.println(prevWork);
+        if (!message.equals("")) {
+            System.out.println(message);
             System.out.println();
-            prevWork = "";
+            message = "";
         }
         System.out.println("SHAKESHACK BURGER에 오신걸 환영합니다.");
         System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
