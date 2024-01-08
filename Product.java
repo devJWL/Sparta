@@ -63,19 +63,11 @@ public class Product extends Menu{
             return sb.toString();
         }
         if (type == ProductType.DRINK){
-<<<<<<< HEAD
             sb.append("Regular : ₩").append(sPrice).append(" | ");
             sb.append("Large : ₩").append(dPrice);
         }
         else {
-            sb.append("Single : ₩").append(sPrice).append(" | ");
-=======
-            sb.append("Regular : ₩").append(sPrice).append("    ");
-            sb.append("Large : ₩").append(dPrice);
-        }
-        else {
             sb.append("Single : ₩").append(sPrice).append("    ");
->>>>>>> 88d189e1a2960501c45b04bcec271a883b29c6db
             sb.append("Double : ₩").append(dPrice);
         }
         return sb.toString();
